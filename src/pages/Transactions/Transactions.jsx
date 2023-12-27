@@ -1,0 +1,88 @@
+import {
+  Button,
+  Card,
+  Flex,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Tag,
+  InputGroup,
+  InputLeftElement,
+  Icon,
+  Input,
+  HStack,
+} from "@chakra-ui/react";
+import React from "react";
+import DashboardLayout from "../../components/DashboardLayout";
+import { IoMdDownload, IoMdSearch } from "react-icons/io";
+import TransactionTable from "./components/TransactionTable";
+
+const Transactions = () => {
+  const tabs = [
+    {
+      name: "All",
+      count: "349",
+    },
+    {
+      name: "Deposit",
+      count: "114",
+    },
+    {
+      name: "Withdraw",
+      count: "55",
+    },
+    {
+      name: "Trade",
+      count: "50",
+    },
+  ];
+  return (
+    <DashboardLayout title='Transactions'>
+      <Flex justify="end" mt={6} mb={3}>
+        <Button leftIcon={<IoMdDownload />}>Export CSV</Button>
+      </Flex>
+      <Card borderRadius={"14px"}>
+        <Tabs>
+          <TabList pt={4} display='flex' justifyContent='space-between'>
+           <HStack>
+           {tabs.map((tab) => (
+              <Tab display="flex" gap="2" pb={4}>
+                {tab.name}
+                <Tag colorScheme="gray" borderRadius={"full"}>
+                  {tab.count}
+                </Tag>
+              </Tab>
+            ))}
+           </HStack>
+
+            <InputGroup maxWidth='200px' pr={6}>
+              <InputLeftElement pointerEvents="none">
+                <Icon as={IoMdSearch} />
+              </InputLeftElement>
+              <Input type="tel" placeholder="Search..." />
+            </InputGroup>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>
+              <TransactionTable />
+            </TabPanel>
+            <TabPanel>
+              <TransactionTable />
+            </TabPanel>
+            <TabPanel>
+              <TransactionTable />
+            </TabPanel>
+            <TabPanel>
+              <TransactionTable />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Card>
+    </DashboardLayout>
+  );
+};
+
+export default Transactions;
